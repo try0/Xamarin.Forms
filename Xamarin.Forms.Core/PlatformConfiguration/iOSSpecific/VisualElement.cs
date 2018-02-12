@@ -1,6 +1,7 @@
 
 namespace Xamarin.Forms.PlatformConfiguration.iOSSpecific
 {
+	using System;
 	using FormsElement = Forms.VisualElement;
 
 	public static class VisualElement
@@ -29,6 +30,161 @@ namespace Xamarin.Forms.PlatformConfiguration.iOSSpecific
 			SetBlurEffect(config.Element, value);
 			return config;
 		}
+
+		#region Shadow Settings
+
+		public class ShadowEffect : RoutingEffect
+		{
+			public ShadowEffect() : base("Xamarin.ShadowEffect") { }
+		}
+
+		public static readonly BindableProperty IsShadowEnabledProperty =
+			BindableProperty.Create("IsShadowEnabled", typeof(bool),
+			typeof(VisualElement), false, propertyChanged: OnIsShadowEnabledChanged);
+
+		private static void OnIsShadowEnabledChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			var visualElement = bindable as FormsElement;
+			var enabled = (bool)newValue;
+			if (enabled)
+			{
+				visualElement.Effects.Add(new ShadowEffect());
+			}
+			else
+			{
+				foreach (var effect in visualElement.Effects)
+				{
+					if (effect is ShadowEffect)
+					{
+						visualElement.Effects.Remove(effect);
+						break;
+					}
+				}
+			}
+		}
+
+		public static bool GetIsShadowEnabled(BindableObject element)
+		{
+			return (bool)element.GetValue(IsShadowEnabledProperty);
+		}
+
+		public static void SetIsShadowEnabled(BindableObject element, bool value)
+		{
+			element.SetValue(IsShadowEnabledProperty, value);
+		}
+
+		public static bool GetIsShadowEnabled(this IPlatformElementConfiguration<iOS, FormsElement> config)
+		{
+			return GetIsShadowEnabled(config.Element);
+		}
+
+		public static IPlatformElementConfiguration<iOS, FormsElement> SetIsShadowEnabled(this IPlatformElementConfiguration<iOS, FormsElement> config, bool value)
+		{
+			SetIsShadowEnabled(config.Element, value);
+			return config;
+		}
+
+		public static readonly BindableProperty ShadowColorProperty =
+			BindableProperty.Create("ShadowColor", typeof(Color),
+			typeof(VisualElement), Color.Default);
+
+		public static Color GetShadowColor(BindableObject element)
+		{
+			return (Color)element.GetValue(ShadowColorProperty);
+		}
+
+		public static void SetShadowColor(BindableObject element, Color value)
+		{
+			element.SetValue(ShadowColorProperty, value);
+		}
+
+		public static Color GetShadowColor(this IPlatformElementConfiguration<iOS, Xamarin.Forms.VisualElement> config)
+		{
+			return GetShadowColor(config.Element);
+		}
+
+		public static IPlatformElementConfiguration<iOS, Xamarin.Forms.VisualElement> SetShadowColor(this IPlatformElementConfiguration<iOS, Xamarin.Forms.VisualElement> config, Color value)
+		{
+			SetShadowColor(config.Element, value);
+			return config;
+		}
+
+		public static readonly BindableProperty ShadowRadiusProperty =
+			BindableProperty.Create("ShadowRadius", typeof(double),
+			typeof(VisualElement), 10.0);
+
+		public static double GetShadowRadius(BindableObject element)
+		{
+			return (double)element.GetValue(ShadowRadiusProperty);
+		}
+
+		public static void SetShadowRadius(BindableObject element, double value)
+		{
+			element.SetValue(ShadowRadiusProperty, value);
+		}
+
+		public static double GetShadowRadius(this IPlatformElementConfiguration<iOS, Xamarin.Forms.VisualElement> config)
+		{
+			return GetShadowRadius(config.Element);
+		}
+
+		public static IPlatformElementConfiguration<iOS, Xamarin.Forms.VisualElement> SetShadowRadius(this IPlatformElementConfiguration<iOS, Xamarin.Forms.VisualElement> config, double value)
+		{
+			SetShadowRadius(config.Element, value);
+			return config;
+		}
+
+		public static readonly BindableProperty ShadowOffsetProperty =
+		BindableProperty.Create("ShadowOffset", typeof(Size),
+		typeof(VisualElement), Size.Zero);
+
+		public static Size GetShadowOffset(BindableObject element)
+		{
+			return (Size)element.GetValue(ShadowOffsetProperty);
+		}
+
+		public static void SetShadowOffset(BindableObject element, Size value)
+		{
+			element.SetValue(ShadowOffsetProperty, value);
+		}
+
+		public static Size GetShadowOffset(this IPlatformElementConfiguration<iOS, Xamarin.Forms.VisualElement> config)
+		{
+			return GetShadowOffset(config.Element);
+		}
+
+		public static IPlatformElementConfiguration<iOS, Xamarin.Forms.VisualElement> SetShadowOffset(this IPlatformElementConfiguration<iOS, Xamarin.Forms.VisualElement> config, Size value)
+		{
+			SetShadowOffset(config.Element, value);
+			return config;
+		}
+
+		public static readonly BindableProperty ShadowOpacityProperty =
+		BindableProperty.Create("ShadowOpacity", typeof(double),
+		typeof(VisualElement), 0.5);
+
+		public static double GetShadowOpacity(BindableObject element)
+		{
+			return (double)element.GetValue(ShadowOpacityProperty);
+		}
+
+		public static void SetShadowOpacity(BindableObject element, double value)
+		{
+			element.SetValue(ShadowOpacityProperty, value);
+		}
+
+		public static double GetShadowOpacity(this IPlatformElementConfiguration<iOS, Xamarin.Forms.VisualElement> config)
+		{
+			return GetShadowOpacity(config.Element);
+		}
+
+		public static IPlatformElementConfiguration<iOS, Xamarin.Forms.VisualElement> SetShadowOpacity(this IPlatformElementConfiguration<iOS, Xamarin.Forms.VisualElement> config, double value)
+		{
+			SetShadowOpacity(config.Element, value);
+			return config;
+		}
+
+		#endregion
 
 		#region IsLegacyColorModeEnabled
 
