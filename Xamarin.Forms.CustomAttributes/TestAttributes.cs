@@ -648,7 +648,11 @@ namespace Xamarin.Forms.CustomAttributes
 		public enum Slider {
 			Minimum,
 			Maximum,
-			Value
+			Value,
+			MinimumTrackColor,
+			MaximumTrackColor,
+			ThumbColor,
+			ThumbImage
 		}
 
 		public enum StackLayout {
