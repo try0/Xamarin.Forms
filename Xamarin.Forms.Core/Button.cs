@@ -7,8 +7,23 @@ using Xamarin.Forms.Platform;
 
 namespace Xamarin.Forms
 {
+
+
+	public interface IBackgroundView : INotifyPropertyChanged
+	{
+		BindableProperty CornerRadiusProperty { get; }
+		BindableProperty BorderColorProperty { get; }
+		BindableProperty BorderWidthProperty { get; }
+		int CornerRadius { get; }
+		Color BorderColor { get; }
+		Color BackgroundColor { get; }
+		double BorderWidth { get; }
+		bool IsSet(BindableProperty targetProperty);
+	}
+
+
 	[RenderWith(typeof(_ButtonRenderer))]
-	public class Button : View, IFontElement, ITextElement, IBorderElement, IButtonController, IElementConfiguration<Button>
+	public class Button : View, IFontElement, ITextElement, IBorderElement, IButtonController, IElementConfiguration<Button>, IBackgroundView
 	{
 		const double DefaultSpacing = 10;
 		const int DefaultBorderRadius = 5;
@@ -171,6 +186,13 @@ namespace Xamarin.Forms
 			set { SetValue(FontSizeProperty, value); }
 		}
 
+		BindableProperty IBackgroundView.CornerRadiusProperty => Button.CornerRadiusProperty;
+
+		BindableProperty IBackgroundView.BorderColorProperty => Button.BorderColorProperty;
+
+		BindableProperty IBackgroundView.BorderWidthProperty => Button.BorderWidthProperty;
+
+
 		public event EventHandler Clicked;
 
 		public event EventHandler Pressed;
@@ -308,6 +330,7 @@ namespace Xamarin.Forms
 		void IBorderElement.OnBorderColorPropertyChanged(Color oldValue, Color newValue)
 		{
 		}
+		 
 
 		[DebuggerDisplay("Image Position = {Position}, Spacing = {Spacing}")]
 		[TypeConverter(typeof(ButtonContentTypeConverter))]

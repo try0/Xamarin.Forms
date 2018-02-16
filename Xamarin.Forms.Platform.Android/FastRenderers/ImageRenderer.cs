@@ -20,7 +20,7 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 		readonly MotionEventHelper _motionEventHelper = new MotionEventHelper();
 
 		protected override void Dispose(bool disposing)
-		{
+		{			
 			if (_disposed)
 				return;
 
@@ -65,10 +65,10 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 
 		async void OnElementChanged(ElementChangedEventArgs<Image> e)
 		{
-			await TryUpdateBitmap(e.OldElement);
-			UpdateAspect();
 			this.EnsureId();
 
+			await TryUpdateBitmap(e.OldElement);
+			UpdateAspect();
 			ElevationHelper.SetElevation(this, e.NewElement);
 
 			ElementChanged?.Invoke(this, new VisualElementChangedEventArgs(e.OldElement, e.NewElement));
@@ -205,7 +205,7 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 			{
 				return;
 			}
-
+						
 			await Control.UpdateBitmap(_element, previous);
 		}
 

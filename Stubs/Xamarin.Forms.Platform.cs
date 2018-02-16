@@ -49,6 +49,14 @@ namespace Xamarin.Forms.Platform
 	[RenderWith (typeof (ButtonRenderer))]
 	internal class _ButtonRenderer { }
 
+#if __ANDROID__
+	[RenderWith(typeof(Android.FastRenderers.ImageButtonRenderer))]
+#else
+	[RenderWith(typeof(ImageButtonRenderer))]
+#endif
+	internal class _ImageButtonRenderer { }
+
+
 	[RenderWith (typeof (TableViewRenderer))]
 	internal class _TableViewRenderer { }
 

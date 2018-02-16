@@ -104,7 +104,7 @@
     <Compile Include="AndroidApplicationLifecycleState.cs" />
     <Compile Include="AndroidTitleBarVisibility.cs" />
     <Compile Include="AppCompat\FrameRenderer.cs" />
-    <Compile Include="ButtonBackgroundTracker.cs" />
+    <Compile Include="BorderBackgroundTracker.cs" />
     <Compile Include="Elevation.cs" />
     <Compile Include="Extensions\EntryRendererExtensions.cs" />
     <Compile Include="FastRenderers\AutomationPropertiesProvider.cs" />
@@ -131,6 +131,7 @@
     <Compile Include="ExportImageSourceHandlerAttribute.cs" />
     <Compile Include="ExportRendererAttribute.cs" />
     <Compile Include="Extensions\FlowDirectionExtensions.cs" />
+    <Compile Include="FastRenderers\ImageButtonRenderer.cs" />
     <Compile Include="GestureManager.cs" />
     <Compile Include="FastRenderers\LabelRenderer.cs" />
     <Compile Include="FastRenderers\VisualElementRenderer.cs" />
@@ -169,7 +170,7 @@
     <Compile Include="PlatformEffect.cs" />
     <Compile Include="LayoutExtensions.cs" />
     <Compile Include="Renderers\AHorizontalScrollView.cs" />
-    <Compile Include="Renderers\ButtonDrawable.cs" />
+    <Compile Include="Renderers\BorderDrawable.cs" />
     <Compile Include="Renderers\AlignmentExtensions.cs" />
     <Compile Include="Renderers\ConditionalFocusLayout.cs" />
     <Compile Include="Renderers\DescendantFocusToggler.cs" />

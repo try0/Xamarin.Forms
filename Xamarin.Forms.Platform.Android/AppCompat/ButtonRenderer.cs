@@ -15,9 +15,11 @@ using static System.String;
 
 namespace Xamarin.Forms.Platform.Android.AppCompat
 {
-    public class ButtonRenderer : ViewRenderer<Button, AppCompatButton>, AView.IOnAttachStateChangeListener
+    public class ButtonRenderer : 
+		ViewRenderer<Button, AppCompatButton>, 
+		AView.IOnAttachStateChangeListener
 	{
-		ButtonBackgroundTracker _backgroundTracker;
+		BorderBackgroundTracker _backgroundTracker;
 		TextColorSwitcher _textColorSwitcher;
 		float _defaultFontSize;
 		Typeface _defaultTypeface;
@@ -120,7 +122,7 @@ namespace Xamarin.Forms.Platform.Android.AppCompat
 				}
 
 				if (_backgroundTracker == null)
-					_backgroundTracker = new ButtonBackgroundTracker(Element, Control);
+					_backgroundTracker = new BorderBackgroundTracker(Element, Control);
 				else
 					_backgroundTracker.Button = e.NewElement;
 

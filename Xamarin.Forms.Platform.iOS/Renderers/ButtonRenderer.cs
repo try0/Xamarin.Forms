@@ -197,7 +197,7 @@ namespace Xamarin.Forms.Platform.iOS
 		}
 
 		void UpdateText()
-		{
+		{			
 			var newText = Element.Text;
 
 			if (Control.Title(UIControlState.Normal) != newText)

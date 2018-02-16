@@ -4,26 +4,30 @@ using Android.Content.Res;
 using Android.Graphics.Drawables;
 using Android.OS;
 using AButton = Android.Widget.Button;
+using AView = Android.Views.View;
 
 namespace Xamarin.Forms.Platform.Android
 {
-	internal class ButtonBackgroundTracker : IDisposable
+
+	internal class BorderBackgroundTracker : IDisposable
 	{
 		Drawable _defaultDrawable;
-		ButtonDrawable _backgroundDrawable;
+		BorderDrawable _backgroundDrawable;
 		RippleDrawable _rippleDrawable;
-		Button _button;
-		AButton _nativeButton;
+		IBackgroundView _button;
+		AView _nativeButton;
 		bool _drawableEnabled;
 		bool _disposed;
 
-		public ButtonBackgroundTracker(Button button, AButton nativeButton)
+		public BorderBackgroundTracker(
+			IBackgroundView button,
+			AView nativeButton)
 		{
 			Button = button;
 			_nativeButton = nativeButton;
 		}
 
-		public Button Button
+		public IBackgroundView Button
 		{
 			get { return _button; }
 			set
@@ -42,7 +46,8 @@ namespace Xamarin.Forms.Platform.Android
 			if (_button == null || _nativeButton == null)
 				return;
 
-			bool cornerRadiusIsDefault = !_button.IsSet(Button.CornerRadiusProperty) || (_button.CornerRadius == (int)Button.CornerRadiusProperty.DefaultValue || _button.CornerRadius == ButtonDrawable.DefaultCornerRadius);
+
+			bool cornerRadiusIsDefault = !_button.IsSet(Button.CornerRadiusProperty) || (_button.CornerRadius == (int)Button.CornerRadiusProperty.DefaultValue || _button.CornerRadius == BorderDrawable.DefaultCornerRadius);
 			bool backgroundColorIsDefault = !_button.IsSet(VisualElement.BackgroundColorProperty) || _button.BackgroundColor == (Color)VisualElement.BackgroundColorProperty.DefaultValue;
 			bool borderColorIsDefault = !_button.IsSet(Button.BorderColorProperty) || _button.BorderColor == (Color)Button.BorderColorProperty.DefaultValue;
 			bool borderWidthIsDefault = !_button.IsSet(Button.BorderWidthProperty) || _button.BorderWidth == (double)Button.BorderWidthProperty.DefaultValue;
@@ -63,7 +68,7 @@ namespace Xamarin.Forms.Platform.Android
 			else
 			{
 				if (_backgroundDrawable == null)
-					_backgroundDrawable = new ButtonDrawable(_nativeButton.Context.ToPixels, Forms.GetColorButtonNormal(_nativeButton.Context));
+					_backgroundDrawable = new BorderDrawable(_nativeButton.Context.ToPixels, Forms.GetColorButtonNormal(_nativeButton.Context));
 
 				_backgroundDrawable.Button = _button;
 				_backgroundDrawable.SetPaddingTop(_nativeButton.PaddingTop);

@@ -13,8 +13,11 @@ using static System.String;
 
 namespace Xamarin.Forms.Platform.Android.FastRenderers
 {
-	internal sealed class ButtonRenderer : AppCompatButton, IVisualElementRenderer, AView.IOnAttachStateChangeListener,
-		AView.IOnFocusChangeListener, IEffectControlProvider, AView.IOnClickListener, AView.IOnTouchListener
+	internal sealed class ButtonRenderer : AppCompatButton, 
+		IVisualElementRenderer, AView.IOnAttachStateChangeListener,
+		AView.IOnFocusChangeListener, IEffectControlProvider, 
+		AView.IOnClickListener, 
+		AView.IOnTouchListener
 	{
 		float _defaultFontSize;
 		int? _defaultLabelFor;
@@ -26,7 +29,7 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 		readonly AutomationPropertiesProvider _automationPropertiesProvider;
 		readonly EffectControlProvider _effectControlProvider;
 		VisualElementTracker _tracker;
-		ButtonBackgroundTracker _backgroundTracker;
+		BorderBackgroundTracker _backgroundTracker;
 
 		public event EventHandler<VisualElementChangedEventArgs> ElementChanged;
 		public event EventHandler<PropertyChangedEventArgs> ElementPropertyChanged;
@@ -92,8 +95,6 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 
 		void IOnFocusChangeListener.OnFocusChange(AView v, bool hasFocus)
 		{
-			OnNativeFocusChanged(hasFocus);
-
 			((IElementController)Button).SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, hasFocus);
 		}
 
@@ -131,7 +132,7 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 			}
 
 			if (_backgroundTracker == null)
-				_backgroundTracker = new ButtonBackgroundTracker(Button, this);
+				_backgroundTracker = new BorderBackgroundTracker(Button, this);
 			else
 				_backgroundTracker.Button = Button;
 
@@ -168,11 +169,7 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 			LabelFor = (int)(id ?? _defaultLabelFor);
 		}
 
-		void IVisualElementRenderer.UpdateLayout()
-		{
-			var reference = Guid.NewGuid().ToString();
-			_tracker?.UpdateLayout();
-		}
+		void IVisualElementRenderer.UpdateLayout() => _tracker?.UpdateLayout();
 
 		protected override void Dispose(bool disposing)
 		{
@@ -308,10 +305,6 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 		void UpdateBackgroundColor()
 		{
 			_backgroundTracker?.UpdateBackgroundColor();
-		}
-
-		internal void OnNativeFocusChanged(bool hasFocus)
-		{
 		}
 
 		internal void SendVisualElementInitialized(VisualElement element, AView nativeView)

@@ -39,8 +39,8 @@ namespace Xamarin.Forms.ControlGallery.Android
 			//Window.AddFlags(WindowManagerFlags.Fullscreen | WindowManagerFlags.TurnScreenOn);
 
 			base.OnCreate(bundle);
-			
 
+			Forms.SetFlags("FastRenderers_Experimental");
 #if TEST_EXPERIMENTAL_RENDERERS
 			Forms.SetFlags("FastRenderers_Experimental");
 #else

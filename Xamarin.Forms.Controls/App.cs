@@ -50,7 +50,124 @@ namespace Xamarin.Forms.Controls
 
 		public Page CreateDefaultMainPage()
 		{
-			var layout = new StackLayout { BackgroundColor = Color.Red };
+			/*
+			Label someLabel = new Label();
+
+			someLabel.Effects.Add(new Issues.Bugzilla58406._58406Effect());
+
+			return new ContentPage()
+			{
+				Content = someLabel
+			};
+			*/
+			//return new ContentPage()
+			//{
+			//	Content = new ImageButton()
+			//	{
+			//		Source = "coffee.png",
+			//		//ContentLayout = new Button.ButtonContentLayout(Button.ButtonContentLayout.ImagePosition.Right, 100),
+			//		//Text = "Whatever",
+
+			//	}
+			//};
+
+			ImageButton button = new ImageButton() { Source = "coffee.png" };
+
+			button.CornerRadius = 12;
+			button.BorderWidth = 12;
+			button.BorderColor = Color.Green;
+
+
+			Button button2 = new Button() { Text = "Flip"  };
+			button2.CornerRadius = 12;
+			button2.BorderWidth = 12;
+			button2.BorderColor = Color.Green;
+
+			Button button3 = new Button() { Text = "Kill the Image" };
+			StackLayout layout = new StackLayout();
+			Image image = new Image() { Source = "coffee.png" };
+			WeakReference reference = new WeakReference(image);
+			WeakReference fileImageSource = new WeakReference(image.Source);
+
+
+			button.Clicked += (_, __) =>
+			{
+
+			};
+
+			button.Command = new Command(() =>
+			{
+
+			});
+
+			button2.Clicked += (x, y) =>
+			{
+				button.IsEnabled = !button.IsEnabled;
+
+				if(!button.IsEnabled)
+				{
+					
+					((FileImageSource)image.Source).File = "bank.png";
+				}
+				else
+				{
+					((FileImageSource)image.Source).File = "coffee.png";
+				}
+
+				GC.Collect();
+				GC.Collect(1);
+			};
+
+			button3.Clicked += (x, y) =>
+			{
+				if (image != null)
+				{
+					layout.Children.Remove(image);
+					image = null;
+				}
+
+				GC.Collect();
+				GC.Collect(1);
+				button3.Text = $"{reference.IsAlive} {fileImageSource.IsAlive}";
+			};
+
+			var stateGroups = new VisualStateGroupList();
+			var visualStateGroup = new VisualStateGroup { Name = "CommonStates" };
+			var normalState = new VisualState { Name = "Normal" };
+			normalState.Setters.Add(new Setter() { Property = ImageButton.SourceProperty, Value = "coffee.png" });
+
+			var disabledState = new VisualState { Name = "Disabled" };
+			disabledState.Setters.Add(new Setter() { Property = ImageButton.SourceProperty, Value = "bank.png" });
+
+			var pressedState = new VisualState { Name = "Pressed" };
+			pressedState.Setters.Add(new Setter() { Property = ImageButton.SourceProperty, Value = "calculator.png" });
+
+			var focusedState = new VisualState { Name = "Focused" };
+			focusedState.Setters.Add(new Setter() { Property = ImageButton.SourceProperty, Value = "Fruits.png" });
+
+
+			visualStateGroup.States.Add(normalState);
+			visualStateGroup.States.Add(disabledState);
+			visualStateGroup.States.Add(focusedState);
+			visualStateGroup.States.Add(pressedState);
+
+			stateGroups.Add(visualStateGroup);
+			
+			VisualStateManager.SetVisualStateGroups(button, stateGroups);
+
+			layout.Children.Add(button);
+			layout.Children.Add(button2);
+			layout.Children.Add(button3);
+			layout.Children.Add(image);
+
+			
+			return new ContentPage()
+			{
+				Content = layout
+			};
+
+
+			/*var layout = new StackLayout { BackgroundColor = Color.Red };
 			layout.Children.Add(new Label { Text ="This is master Page" });
 			var master = new ContentPage { Title = "Master", Content = layout,  BackgroundColor = Color.SkyBlue };
 			master.On<iOS>().SetUseSafeArea(true);
@@ -59,7 +176,7 @@ namespace Xamarin.Forms.Controls
 				AutomationId = DefaultMainPageId,
 				Master = master,
 				Detail = CoreGallery.GetMainPage()
-			};
+			};*/
 		}
 
 		protected override void OnAppLinkRequestReceived(Uri uri)
