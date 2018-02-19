@@ -27,10 +27,6 @@ namespace Xamarin.Forms.Build.Tasks
 			                       MethodAttributes.SpecialName |
 			                       MethodAttributes.RTSpecialName;
 
-			var flags = BindingFlags.Public |
-			            BindingFlags.NonPublic |
-			            BindingFlags.Instance;
-
 			var parentctor =    module.ImportCtorReference(parentType, paramCount: 0, predicate: md => (!md.IsPrivate && !md.IsStatic))
 							 ?? module.ImportCtorReference(("mscorlib", "System", "Object"), paramCount: 0);
 
